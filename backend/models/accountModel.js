@@ -73,6 +73,7 @@ const accountSchema = new mongoose.Schema({
      
 }, options); //using options defined at the start of the file
 
+//Pre-middleware hook
 accountSchema.pre('save', async function(next) { 
 	const currentAccount = this; 
 
@@ -89,4 +90,5 @@ accountSchema.methods.comparePasswords = async function(candidatePassword, accou
 	return await bcrypt.compare(candidatePassword, accountPassword); // Compare the passwords before authentication
 };
 
+//Exporting the account model
 module.exports = mongoose.model('Account', accountSchema);
